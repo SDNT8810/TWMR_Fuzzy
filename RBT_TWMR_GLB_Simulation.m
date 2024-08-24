@@ -3,10 +3,10 @@ function Results = RBT_TWMR_GLB_Simulation(Model, Controller, T, Desired_Conditi
     % Initializing Parameters
     Fuzzification_Type = "gaussmf";
 
-    MFs_Size = 5;
+    MFs_Size = 3;
     O_MFs_Size = 3;
-    load Best_Results.mat ANN_W_5;
-    ANN_W_Matrix = ANN_W_5;
+    load Best_Results.mat ANN_W_3;
+    ANN_W_Matrix = ANN_W_3;
 
     omega = Model.omega;
     d = Model.d;
@@ -105,7 +105,7 @@ function Results = RBT_TWMR_GLB_Simulation(Model, Controller, T, Desired_Conditi
         yrbt(i) = yrbt(i-1) + T.dt_sim*V*sin(Theta(i));
         
         % update_ANN(epsilon, MFs_Size, Global_ERROR, Theta(i), Phi_E);
-          update_ANN(0.001   , MFs_Size, Global_E    , Theta(i), Fuzzy_Phi);
+        update_ANN(0.001   , MFs_Size, Global_E    , Theta(i), Fuzzy_Phi);
     end
 
     % Saving States and Results

@@ -9,7 +9,7 @@ Robot_Params = RBT_TWMR_Local_Params(2, 5  , 6  , 0.3, 0.075, 0.075, 0.3, 100);
 Robot_Dynamic_Model = RBT_TWMR_GLB_INIT(0,       0,      -3    , Robot_Params);
 
 % Define the Time Struct (t_zero,dt_sim,t_Max)
-Time_Struct = RBT_TWMR_Time_Condition(0,0.001,1);
+Time_Struct = RBT_TWMR_Time_Condition(0,0.001,5);
 
 % Desired Conditions (Path_Type, Path_Size, Time) 
 % Path_Type => { 'circle' , 'spiral' , 'line' , 'sin' }
@@ -19,8 +19,8 @@ d_c = RBT_TWMR_GLB_desired_condition('circle', 3, Time_Struct);
 RBT_States = RBT_TWMR_GLB_States(Robot_Dynamic_Model, d_c, Time_Struct);    
 
 % Design Controller
-Landa.landa1 = 10;
-Landa.landa2 = 30;
+Landa.landa1 = 1;
+Landa.landa2 = 3;
 
 %MBC = RBT_TWMR_Local_Controller('Unit_Mass_MBC', Landa, Robot_Dynamic_Model);
 MBC = RBT_TWMR_Local_Controller('NN_Dynamic_Model', Landa, Robot_Dynamic_Model);
@@ -31,8 +31,8 @@ Results = RBT_TWMR_GLB_Simulation(Robot_Dynamic_Model, MBC, Time_Struct, d_c, RB
 % Report Results and Plots
 RBT_TWMR_GLB_Report(Results, d_c, Time_Struct);
 
-load Best_Results.mat ANN_W_5
+load Best_Results.mat ANN_W_3
 figure;
-plot(ANN_W_5)
-ANN_W_5
+plot(ANN_W_3)
+ANN_W_3
 
